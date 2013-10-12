@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# Need to check if rubygems is installed.
+# If so, need to update bundler.
+
+command_exists () {
+    type "$1" &> /dev/null ;
+}
+
+
+# echo "Generating default Foreman local environment..."
+# if [ ! -f .env ];
+# then
+#    cp .env.example .env
+# fi
+
+echo "Generated default database.yml..."
+if [ ! -f config/database.yml ];
+then
+   cp config/database.sample.yml config/database.yml
+fi
+
+# echo "Generated default application.yml..."
+# if [ ! -f config/application.yml ];
+# then
+#    cp config/application.yml.example config/application.yml
+# fi
+
+echo "Bundling gems..."
+bundle install
+
+echo "Migrating..."
+bundle exec rake db:migrate
+
+
+# Use this to test for redis.
+
+# Currently, the redis test checks for a local redis.
+# In the future, we'd probably like to be able to use
+# the redis env from Rails to test. That way, if a user
+# changes the Redis configuration, we can handle it.
+
+# if command_exists redis-server
+# then
+#   if command_exists redis-cli
+#   then
+#     MSG=`redis-cli ping`
+#     if [ "$MSG" != "PONG" ]
+#     then
+#       echo "Redis doesn't seem to be running."
+#       echo "Make sure to start redis-server before starting the web server."
+#     else
+#       echo "Checking that Redis is running... Success!"
+#     fi
+#   else
+#     echo "I think Redis is installed, but I can't tell if it's running"
+#     echo "Make sure to start redis-server before starting the web server."
+#   fi
+# else
+#   echo "Unable to determine if Redis is installed."
+#   echo "If it is, ensure it's running before starting the web server."
+#   echo "If it isn't, you can install it easily on OS X with homebrew via:"
+#   echo "brew install redis"
+#   echo "For other environments, see: http://redis.io/download"
+# fi
+
+
+# Add something about Pow or Foreman or Something for running the server.
