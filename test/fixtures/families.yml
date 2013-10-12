@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  last_name: MyString
+  first_name: MyString
+  phone: MyString
+  address: MyText
+  directions: MyText
+  family_size: 1
+  children_size: 1
+  food_only: false
+  box: 1
+  children_count: 1
+  pickup: false
+  flag: false
+  completed_at: 2013-10-12 15:15:10
+  reserve: false
+
+two:
+  last_name: MyString
+  first_name: MyString
+  phone: MyString
+  address: MyText
+  directions: MyText
+  family_size: 1
+  children_size: 1
+  food_only: false
+  box: 1
+  children_count: 1
+  pickup: false
+  flag: false
+  completed_at: 2013-10-12 15:15:10
+  reserve: false

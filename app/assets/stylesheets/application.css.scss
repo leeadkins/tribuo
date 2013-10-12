@@ -13,8 +13,16 @@
  */
 
 
+$navbar-inverse-bg: #563d7c;
+$navbar-inverse-link-color: #fff;
+$navbar-inverse-color: #fff;
+
 @import "twitter/bootstrap";
 
-body {
+body, body.standard {
+  padding-top: 70px;
+}
+
+body.inverted {
   background: #563d7c;
 }
