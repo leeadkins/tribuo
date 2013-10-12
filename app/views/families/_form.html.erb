@@ -1,17 +1,65 @@
-<%= form_for(@family) do |f| %>
+<%= form_for(@family, class: 'form-horizontal') do |f| %>
   <% if @family.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@family.errors.count, "error") %> prohibited this family from being saved:</h2>
-
-      <ul>
-      <% @family.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div id="error_explanation" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <%= pluralize(@family.errors.count, "error") %> prohibited this family from being saved
+        </h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @family.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul> 
+      </div>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phone %>
+    <%= f.text_field :phone, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.text_area :address, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :directions %>
+    <%= f.text_area :directions, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :family_size %>
+    <%= f.text_field :family_size, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :children_size %>
+    <%= f.text_field :children_size, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <label for="food_only">
+      Food Only
+      <%= f.check_box :food_only %>
+    </label>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit class:'btn btn-default' %>
   </div>
 <% end %>

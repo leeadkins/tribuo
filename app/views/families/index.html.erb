@@ -10,15 +10,26 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>#</th>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Phone</th>
+      <th>Size</th>
+      <th>Children</th>
+      <th>Food Only</th>
     </tr>
   </thead>
 
   <tbody>
     <% @families.each do |family| %>
       <tr>
+        <td><%= family.box %></td>
+        <td><%= family.last_name %></td>
+        <td><%= family.first_name %></td>
+        <td><%= family.phone %></td>
+        <td><%= family.family_size %></td>
+        <td><%= family.children_size %></td>
+        <td><%= !!family.food_only %></td>
         <td><%= link_to 'Show', family %></td>
         <td><%= link_to 'Edit', edit_family_path(family) %></td>
         <td><%= link_to 'Destroy', family, method: :delete, data: { confirm: 'Are you sure?' } %></td>
