@@ -24,6 +24,12 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
+# Great for making some fake families to test the data on.
+gem 'faker'
+
+# Because I don't want to build sorting or searching scopes myself. Duh
+gem 'ransack'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 

@@ -10,14 +10,15 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Last Name</th>
-      <th>First Name</th>
-      <th class="hidden-xs">Phone</th>
-      <th>Size</th>
-      <th>Children</th>
-      <th class="hidden-xs">Food Only</th>
-      <th class="hidden-xs" colspan="2">Options</th>
+      <th><%= sort_link @search, :box, "#" %></th>
+      <th class="hidden-xs text-center"><%= sort_link @search, :flag, '<span class="glyphicon glyphicon-star"></span>'.html_safe %></th>
+      <th><%= sort_link @search, :last_name, "Last Name" %></th>
+      <th><%= sort_link @search, :first_name, "First Name" %></th>
+      <th class="hidden-xs"><%= sort_link @search, :phone, "Phone" %></th>
+      <th class="text-center"><%= sort_link @search, :family_size, "Size" %></th>
+      <th class="text-center"><%= sort_link @search, :children_size, "Children Size" %></th>
+      <th class="hidden-xs text-center"><%= sort_link @search, :food_only, "Food Only" %></th>
+      <th class="hidden-xs text-center" colspan="2">Options</th>
 
     </tr>
   </thead>
@@ -25,16 +26,34 @@
   <tbody>
     <% @families.each do |family| %>
       <tr>
-        <td><%= family.box %></td>
+        <td><%= family.box || '-' %></td>
+        <td class="hidden-xs text-center">
+        <% if family.flag %>
+          <span class="flag_star glyphicon glyphicon-star yellow"></span>
+        <% else %>
+          <span class="flag_star glyphicon glyphicon-star-empty gray"></span>
+        <% end %>
+        </td>
         <td><%= family.last_name %></td>
         <td><%= family.first_name %></td>
         <td class="hidden-xs"><%= family.phone %></td>
-        <td><%= family.family_size %></td>
-        <td><%= family.children_size %></td>
-        <td class="hidden-xs"><%= !!family.food_only %></td>
-        <td class="hidden-xs"><%= link_to 'Show', family %></td>
-        <td class="hidden-xs"><%= link_to 'Edit', edit_family_path(family) %></td>
-
+        <td class="text-center"><%= family.family_size %></td>
+        <td class="text-center"><%= family.children_size %></td>
+        <td class="hidden-xs text-center">
+        <% if family.food_only %>
+          <span class="glyphicon glyphicon-ok"></span>
+        <% end %>
+        </td>
+        <td class="hidden-xs text-center">
+          <a href="<%= family_path(family) %>">
+            <span class="glyphicon glyphicon-info-sign"></span>
+          </a>
+        </td>
+        <td class="hidden-xs text-center">
+          <a href="<%= edit_family_path(family) %>">
+            <span class="glyphicon glyphicon-wrench"></span>
+          </a>
+        </td>
       </tr>
     <% end %>
   </tbody>

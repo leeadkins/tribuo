@@ -47,6 +47,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.0.2)
+    faker (1.2.0)
+      i18n (~> 0.5)
     hike (1.2.3)
     i18n (0.6.5)
     jbuilder (1.5.2)
@@ -63,6 +65,8 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.1)
     orm_adapter (0.4.0)
+    polyamorous (0.6.4)
+      activerecord (>= 3.0)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -81,6 +85,10 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.1.0)
+    ransack (1.0.0)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      polyamorous (~> 0.6.0)
     rdoc (3.12.2)
       json (~> 1.4)
     sass (3.2.12)
@@ -123,9 +131,11 @@ PLATFORMS
 DEPENDENCIES
   anjlab-bootstrap-rails (~> 3.0.0.3)
   devise
+  faker
   jbuilder (~> 1.2)
   jquery-rails
   rails (= 4.0.0)
+  ransack
   sass-rails (~> 4.0.0)
   sdoc
   sqlite3
