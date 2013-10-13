@@ -32,10 +32,10 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/">Home</a></li>
-              <li><a href="/families">Families</a></li>
-              <li><a href="/families">Tickets</a></li>
-              <li><a href="/shopping">Shopping List</a></li>
+              <li class="<%= controller_name == 'welcome' ? 'active' : '' %>"><a href="/">Home</a></li>
+              <li class="<%= controller_name == 'families' ? 'active' : '' %>"><a href="/families">Families</a></li>
+              <li class="<%= controller_name == 'tickets' ? 'active' : '' %>"><a href="/tickets">Tickets</a></li>
+              <li class="<%= controller_name == 'shopping' ? 'active' : '' %>"><a href="/shopping">Shopping List</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>

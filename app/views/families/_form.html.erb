@@ -1,65 +1,105 @@
 <%= form_for(@family, class: 'form-horizontal') do |f| %>
-  <% if @family.errors.any? %>
-    <div id="error_explanation" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <%= pluralize(@family.errors.count, "error") %> prohibited this family from being saved
-        </h3>
+  <div class="row">
+    <div class="col-md-12">
+      <% if @family.errors.any? %>
+        <div id="error_explanation" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <%= pluralize(@family.errors.count, "error") %> prohibited this family from being saved
+            </h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+            <% @family.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul> 
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <div class="form-group">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, class: 'form-control' %>
       </div>
-      <div class="panel-body">
-        <ul>
-        <% @family.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+
+      <div class="form-group">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :phone %>
+        <%= f.text_field :phone, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :address %>
+        <%= f.text_area :address, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :directions %>
+        <%= f.text_area :directions, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :family_size %>
+        <%= f.text_field :family_size, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :children_size %>
+        <%= f.text_field :children_size, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <label for="food_only">
+          Food Only
+          <%= f.check_box :food_only %>
+        </label>
+      </div>
+
+    </div>
+    <div class="col-md-6 form-inline">
+      <h3>Children</h3>
+      <div class="child_fields">
+        <%= f.fields_for :children do |ff| %>
+          <div class="child_form_row">
+            <div class="form-group">
+              <%= ff.text_field :name, class: 'form-control name' %>
+              <%= ff.text_field :gender, class: 'form-control gender'  %>
+              <%= ff.text_field :age, class: 'form-control age'  %>
+            </div>
+          </div>
         <% end %>
-        </ul> 
+      </div>
+      <div class="row">
+        <button type="button" class="btn btn-default" id="add_child_button">Add Child</button>
       </div>
     </div>
-  <% end %>
-
-
-  <div class="form-group">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name, class: 'form-control' %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :phone %>
-    <%= f.text_field :phone, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :address %>
-    <%= f.text_area :address, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :directions %>
-    <%= f.text_area :directions, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :family_size %>
-    <%= f.text_field :family_size, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :children_size %>
-    <%= f.text_field :children_size, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <label for="food_only">
-      Food Only
-      <%= f.check_box :food_only %>
-    </label>
-  </div>
-
-  <div class="form-group">
-    <%= f.submit class:'btn btn-default' %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.submit class:'btn btn-default' %>
+      </div>
+    </div>
   </div>
 <% end %>
+
+<script type="text/template" id="new_child_attributes">
+  <div class="child_form_row">
+    <div class="form-group">
+      <input class="form-control name" name="family[children_attributes][][name]" type="text">
+      <input class="form-control gender" name="family[children_attributes][][gender]" type="text">
+      <input class="form-control age" name="family[children_attributes][][age]" type="text">
+    </div>
+  </div>
+</script>

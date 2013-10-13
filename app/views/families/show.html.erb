@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
 
+<div><%= link_to 'Destroy', @family, method: :delete, data: { confirm: 'Are you sure?' } %></div>
 <%= link_to 'Edit', edit_family_path(@family) %> |
 <%= link_to 'Back', families_path %>

@@ -13,10 +13,12 @@
       <th>#</th>
       <th>Last Name</th>
       <th>First Name</th>
-      <th>Phone</th>
+      <th class="hidden-xs">Phone</th>
       <th>Size</th>
       <th>Children</th>
-      <th>Food Only</th>
+      <th class="hidden-xs">Food Only</th>
+      <th class="hidden-xs" colspan="2">Options</th>
+
     </tr>
   </thead>
 
@@ -26,13 +28,13 @@
         <td><%= family.box %></td>
         <td><%= family.last_name %></td>
         <td><%= family.first_name %></td>
-        <td><%= family.phone %></td>
+        <td class="hidden-xs"><%= family.phone %></td>
         <td><%= family.family_size %></td>
         <td><%= family.children_size %></td>
-        <td><%= !!family.food_only %></td>
-        <td><%= link_to 'Show', family %></td>
-        <td><%= link_to 'Edit', edit_family_path(family) %></td>
-        <td><%= link_to 'Destroy', family, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="hidden-xs"><%= !!family.food_only %></td>
+        <td class="hidden-xs"><%= link_to 'Show', family %></td>
+        <td class="hidden-xs"><%= link_to 'Edit', edit_family_path(family) %></td>
+
       </tr>
     <% end %>
   </tbody>
