@@ -4,7 +4,12 @@ class FamiliesController < ApplicationController
   # GET /families
   # GET /families.json
   def index
-    @families = Family.all
+    @search = Family.search(params[:q])
+    @families = @search.result(distinct: true)
+    respond_to do |format|
+      format.html
+      format.pdf { send_data Family.generate_pdfs, :filename => "families.pdf", :type => "application/pdf"}
+    end
   end
 
   # GET /families/1
