@@ -25,7 +25,7 @@
   <tbody>
     <% @families.each do |family| %>
       <tr>
-        <td><%= family.box %></td>
+        <td><%= family.box || '---' %></td>
         <td><%= family.last_name %></td>
         <td><%= family.first_name %></td>
         <td class="hidden-xs"><%= family.phone %></td>
