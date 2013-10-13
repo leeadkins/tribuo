@@ -7,7 +7,7 @@ Tribuo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   resources :families
-  root 'welcome#index'
+  root 'families#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
