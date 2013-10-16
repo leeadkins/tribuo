@@ -9,6 +9,8 @@ Tribuo::Application.routes.draw do
   resources :families
   root 'families#index'
 
+  resources :tickets
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

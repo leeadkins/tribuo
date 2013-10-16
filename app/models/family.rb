@@ -12,7 +12,7 @@ class Family < ActiveRecord::Base
 
   accepts_nested_attributes_for :children,
     :allow_destroy => true,
-    :reject_if     => :all_blank
+    :reject_if     => proc { |attributes| attributes['name'].blank? || attributes['age'].blank? }
 
 
 
