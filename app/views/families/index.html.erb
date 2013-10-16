@@ -18,7 +18,7 @@
       <th class="text-center"><%= sort_link @search, :family_size, "Size" %></th>
       <th class="text-center"><%= sort_link @search, :children_size, "Children Size" %></th>
       <th class="hidden-xs text-center"><%= sort_link @search, :food_only, "Food Only" %></th>
-      <th class="hidden-xs text-center" colspan="2">Options</th>
+      <th class="hidden-xs text-center" colspan="3">Options</th>
 
     </tr>
   </thead>
@@ -44,12 +44,17 @@
           <span class="glyphicon glyphicon-ok"></span>
         <% end %>
         </td>
-        <td class="hidden-xs text-center">
+        <td class="hidden-xs text-center list_tool_cell">
           <a href="<%= family_path(family) %>">
             <span class="glyphicon glyphicon-info-sign"></span>
           </a>
         </td>
-        <td class="hidden-xs text-center">
+        <td class="hidden-xs text-center list_tool_cell">
+          <a href="<%= family_path(family, :format => :pdf) %>">
+            <span class="glyphicon glyphicon-cloud-download"></span>
+          </a>
+        </td>
+        <td class="hidden-xs text-center list_tool_cell">
           <a href="<%= edit_family_path(family) %>">
             <span class="glyphicon glyphicon-wrench"></span>
           </a>

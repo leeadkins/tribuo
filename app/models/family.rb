@@ -14,63 +14,61 @@ class Family < ActiveRecord::Base
     :allow_destroy => true,
     :reject_if     => proc { |attributes| attributes['name'].blank? || attributes['age'].blank? }
 
-
-
-  def self.generate_pdfs
-    sd = "MARION COUNTY SHERIFF'S DEPARTMENT"
-    pdf=FPDF.new('p','mm','letter')
+  def to_pdf(opts={})
+    pdf = opts[:pdf].blank? ? FPDF.new('p', 'mm', 'letter') : opts[:pdf]
+    half = opts[:half].blank? ? 0  : opts[:half]
     pdf.SetLineWidth(2)
-    pdf.AddPage
-    @switcher = 1;
-    @families = Family.find(:all, :order => 'box ASC')
-    for family in @families
-      # Some quick processing the aid in the generation of these box labels
-      if family.box == nil
-        boxy = " "
-      else
-        boxy = family.box.to_s
-      end
-      if family.children.size == 0
-        toys = "No"
-      else
-        toys = family.children.size.to_s
-      end
-      #That's all...
-      if @switcher == 1
-        pdf.SetFont('Arial','B',16)
-        pdf.TextCenter(10,sd)
-        pdf.SetFont('Arial','',30)
-        pdf.TextRight(30,"Size : " + family.family_size.to_s)
-        pdf.SetFont('Arial','',20)  
-        pdf.TextLeft(30,"Name:    " + family.first_name.capitalize + " " + family.last_name.capitalize)
-        pdf.TextLeft(40,"Address: " + family.address)
-        pdf.TextLeft(50,"Phone:   " + family.phone)
-        pdf.TextLeft(60, (!!family.pickup).to_s)
-        pdf.SetFont('Arial','BI', 205)
-        pdf.TextCenter(120,boxy)
-        pdf.SetFont('Arial','',30)
-        pdf.TextRight(125,"Toys: " + toys)
-        # pdf.Image('public/images/tribtick.jpg',5,115,60)
-        @switcher = 2
-      else
-        pdf.SetFont('Arial', 'B', 16)       
-        pdf.TextCenter(150,sd)
-        pdf.SetFont('Arial', '', 30)
-        pdf.TextRight(170,"Size : "+ family.family_size.to_s)
-        pdf.SetFont('Arial','',20)
-        pdf.TextLeft(170,"Name:    " + family.first_name.capitalize + " " + family.last_name.capitalize)
-        pdf.TextLeft(180,"Address: " + family.address)
-        pdf.TextLeft(190,"Phone:   " + family.phone)
-        pdf.TextLeft(200, (!!family.pickup).to_s)
-        pdf.SetFont('Arial','BI', 205)
-        pdf.TextCenter(260,boxy)
-        pdf.SetFont('Arial','',30)
-        pdf.TextRight(265, "Toys: " + toys)
-        # pdf.Image('public/images/tribtick.jpg',5,255,60)
-        pdf.Line(0,140,215,140)
-        pdf.AddPage
-        @switcher = 1
-      end
+
+    # What are we going to modify the positions by to go to the next page?
+    modifier = half == 0 ? 0 : 140 
+    
+    if half == 0
+      pdf.AddPage #Start a new page
+    else
+      pdf.Line(0, modifier, 215, modifier) # Draw a line on the current page.
+    end
+
+    # Do some setup of strings we're gonns user.
+    if self.box == nil
+      boxString = " "
+    else
+      boxString = self.box.to_s
+    end
+
+    if self.children.size == 0
+      toyCountString = "No"
+    else
+      toyCountString = self.children.size.to_s
+    end
+
+    pdf.SetFont('Arial','B',16)
+    pdf.TextCenter(10 + modifier, "MARION COUNTY SHERIFF'S DEPARTMENT")
+    pdf.SetFont('Arial','',30)
+    pdf.TextRight(30 + modifier,"Size : " + self.family_size.to_s)
+    pdf.SetFont('Arial','',20)  
+    pdf.TextLeft(30 + modifier, "Name:    " + self.first_name.capitalize + " " + self.last_name.capitalize)
+    pdf.TextLeft(40 + modifier, "Address: " + self.address)
+    pdf.TextLeft(50 + modifier, "Phone:   " + self.phone)
+    pdf.TextLeft(60 + modifier, (!!self.pickup).to_s)
+    pdf.SetFont('Arial','BI', 205)
+    pdf.TextCenter(120 + modifier,boxString)
+    pdf.SetFont('Arial','',30)
+    pdf.TextRight(125 + modifier, "Toys: " + toyCountString)
+    # pdf.Image('public/images/tribtick.jpg',5,115 + modifier,60)
+
+    # We weren't passed a PDF object to build off of, so render ourself
+    if opts[:pdf].blank? 
+      return pdf.Output
+    end
+
+  end
+
+
+  def self.to_pdf
+    pdf = FPDF.new('p', 'mm', 'letter')
+    @families = self.order('box ASC')
+    @families.each_with_index do |family, i|
+      family.to_pdf pdf: pdf, half: i%2
     end
     pdf.Output
   end

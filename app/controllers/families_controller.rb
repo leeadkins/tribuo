@@ -8,13 +8,17 @@ class FamiliesController < ApplicationController
     @families = @search.result(distinct: true)
     respond_to do |format|
       format.html
-      format.pdf { send_data Family.generate_pdfs, :filename => "families.pdf", :type => "application/pdf"}
+      format.pdf { send_data Family.to_pdf, :filename => "families_#{Time.now.to_s(:long).parameterize.underscore}.pdf", :type => "application/pdf"}
     end
   end
 
   # GET /families/1
   # GET /families/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf { send_data @family.to_pdf, :filename => "#{@family.first_name}_#{@family.last_name}_#{Time.now.to_s(:long).parameterize.underscore}.pdf", :type => "application.pdf"}
+    end
   end
 
   # GET /families/new
