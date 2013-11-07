@@ -14,6 +14,10 @@ class Family < ActiveRecord::Base
     :allow_destroy => true,
     :reject_if     => proc { |attributes| attributes['name'].blank? || attributes['age'].blank? }
 
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
   def readable_delivery
     self.delivery? ? 'Delivery' : 'Pickup'
   end

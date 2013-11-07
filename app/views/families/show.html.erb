@@ -1,3 +1,67 @@
-<div><%= link_to 'Destroy', @family, method: :delete, data: { confirm: 'Are you sure?' } %></div>
-<%= link_to 'Edit', edit_family_path(@family) %> |
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/families">Families</a></li>
+  <li class="active"><%= @family.full_name %></li>
+</ol>
+
+<div class="row show">
+  <div class="col-md-8">
+    <h2>
+      <%= @family.full_name %>
+    </h2>
+    <h3>
+      <%= @family.address %>
+    </h3>
+
+    <p>
+      Phone: <%= @family.phone %>
+    </p>
+
+    <% if @family.directions.present? %>
+      <h4>Directions</h4>
+      <p>
+        <%= @family.directions %>
+      </p>
+    <% end %>
+
+    <h4>Children</h4>
+    <% if @family.children.empty? %>
+      <p> This family has no children.</p>
+    <% else %>
+      <% @family.children.each do |child| %>
+      <p>
+        <strong><%= child.name %></strong>
+        - <%= child.age %> <%= child.age_type %> old <%= child.gender %>
+      </p>
+      <% end %>
+    <% end %>
+
+  </div>
+  <div class="col-md-4 sidebar">
+    <h5>Box Number</h5>
+    <div class="well box_number">
+      <%= @family.box || 'N/A' %>
+    </div>
+
+    <% if @family.flag %>
+      <button type="button" class='btn col-md-12 btn-warning'>
+        <span class="glyphicon glyphicon-star"></span> Flagged
+      </button>
+    <% else %>
+      <button type="button" class='btn col-md-12 btn-default'>
+        <span class="glyphicon glyphicon-star-empty"></span> Flag
+      </button>
+    <% end %>
+
+    <%= link_to 'Edit', edit_family_path(@family), :class => 'btn btn-primary col-md-12'%>
+    <%= link_to 'Delete Family', @family, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger col-md-12' %>
+
+    <ul class="list-group">
+      <li class="list-group-item"><%= @family.readable_delivery %></li>
+      <li class="list-group-item">Food Only: <%= @family.food_only %></li>
+      <li class="list-group-item">Given Child Count: <%= @family.children_size %></li>
+    </ul>
+  </div>
+</div>
+
 <%= link_to 'Back', families_path %>

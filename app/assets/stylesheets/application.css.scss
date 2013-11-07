@@ -39,3 +39,19 @@ body.inverted {
 .gray {
   color: #d3d3d3;
 }
+
+.show {
+  .box_number {
+    font-size: 36px;
+    text-align: center;
+  }
+
+  .sidebar {
+    h5 {
+      text-align: center;
+    }
+    .btn {
+      margin-bottom: 10px;
+    }
+  }
+}
