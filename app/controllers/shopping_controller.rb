@@ -1,4 +1,4 @@
-class TicketsController < ApplicationController
+class ShoppingController < ApplicationController
   before_filter :authenticate_user!
   def index
   end

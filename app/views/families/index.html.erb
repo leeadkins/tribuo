@@ -1,69 +1,86 @@
+<div class="row">
+  <div class="col-md-2">
+    <div class="list-group">
+      <a href="<%= new_family_path %>" class="btn list-group-item">New Family</a>
+    </div>
+    <div class="list-group">
+      <a href="<%= families_path %>" class="list-group-item">All</a>
+      <a href="<%= families_path(:q => {:flag_true => true}) %>" class="list-group-item">Flagged</a>
+      <a href="#" class="list-group-item">Errors</a>
+      <a href="<%= families_path(:q => {:food_only_true => true}) %>" class="list-group-item">Food Only</a>
+      <a href="<%= families_path(:q => {:children_size_gt => 0}) %>" class="list-group-item">Children</a>
+      <a href="<%= families_path(:q => {:delivery_true => true}) %>" class="list-group-item">Deliveries</a>
+    </div>
+  </div>
 
-<% if @families.empty? %>
+  <div class="col-md-10">
+    <% if @families.empty? %>
 
-<div class="well well-lg">
-  There are no families in the system yet. <%= link_to 'Create one now.', new_family_path %>
-</div>
+    <div class="well well-lg">
+      There are no families in the system yet. <%= link_to 'Create one now.', new_family_path %>
+    </div>
 
-<% else %>
+    <% else %>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th><%= sort_link @search, :box, "#" %></th>
-      <th class="hidden-xs text-center"><%= sort_link @search, :flag, '<span class="glyphicon glyphicon-star"></span>'.html_safe %></th>
-      <th><%= sort_link @search, :last_name, "Last Name" %></th>
-      <th><%= sort_link @search, :first_name, "First Name" %></th>
-      <th class="hidden-xs"><%= sort_link @search, :phone, "Phone" %></th>
-      <th class="text-center"><%= sort_link @search, :family_size, "Size" %></th>
-      <th class="text-center"><%= sort_link @search, :children_size, "Children Size" %></th>
-      <th class="hidden-xs text-center"><%= sort_link @search, :food_only, "Food Only" %></th>
-      <th class="hidden-xs text-center" colspan="3">Options</th>
 
-    </tr>
-  </thead>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= sort_link @search, :box, "#" %></th>
+          <th class="hidden-xs text-center"><%= sort_link @search, :flag, '<span class="glyphicon glyphicon-star"></span>'.html_safe %></th>
+          <th><%= sort_link @search, :last_name, "Last Name" %></th>
+          <th><%= sort_link @search, :first_name, "First Name" %></th>
+          <th class="hidden-xs"><%= sort_link @search, :phone, "Phone" %></th>
+          <th class="text-center"><%= sort_link @search, :family_size, "Size" %></th>
+          <th class="text-center"><%= sort_link @search, :children_size, "Children Size" %></th>
+          <th class="hidden-xs text-center"><%= sort_link @search, :food_only, "Food Only" %></th>
+          <th class="hidden-xs text-center" colspan="3">Options</th>
 
-  <tbody>
-    <% @families.each do |family| %>
-      <tr>
-        <td><%= family.box || '-' %></td>
-        <td class="hidden-xs text-center">
-        <% if family.flag %>
-          <span class="flag_star glyphicon glyphicon-star yellow"></span>
-        <% else %>
-          <span class="flag_star glyphicon glyphicon-star-empty gray"></span>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @families.each do |family| %>
+          <tr>
+            <td><%= family.box || '-' %></td>
+            <td class="hidden-xs text-center">
+            <% if family.flag %>
+              <span class="flag_star glyphicon glyphicon-star yellow"></span>
+            <% else %>
+              <span class="flag_star glyphicon glyphicon-star-empty gray"></span>
+            <% end %>
+            </td>
+            <td><%= family.last_name %></td>
+            <td><%= family.first_name %></td>
+            <td class="hidden-xs"><%= family.phone %></td>
+            <td class="text-center"><%= family.family_size %></td>
+            <td class="text-center"><%= family.children_size %></td>
+            <td class="hidden-xs text-center">
+            <% if family.food_only %>
+              <span class="glyphicon glyphicon-ok"></span>
+            <% end %>
+            </td>
+            <td class="hidden-xs text-center list_tool_cell">
+              <a href="<%= family_path(family) %>">
+                <span class="glyphicon glyphicon-info-sign"></span>
+              </a>
+            </td>
+            <td class="hidden-xs text-center list_tool_cell">
+              <a href="<%= family_path(family, :format => :pdf) %>">
+                <span class="glyphicon glyphicon-cloud-download"></span>
+              </a>
+            </td>
+            <td class="hidden-xs text-center list_tool_cell">
+              <a href="<%= edit_family_path(family) %>">
+                <span class="glyphicon glyphicon-wrench"></span>
+              </a>
+            </td>
+          </tr>
         <% end %>
-        </td>
-        <td><%= family.last_name %></td>
-        <td><%= family.first_name %></td>
-        <td class="hidden-xs"><%= family.phone %></td>
-        <td class="text-center"><%= family.family_size %></td>
-        <td class="text-center"><%= family.children_size %></td>
-        <td class="hidden-xs text-center">
-        <% if family.food_only %>
-          <span class="glyphicon glyphicon-ok"></span>
-        <% end %>
-        </td>
-        <td class="hidden-xs text-center list_tool_cell">
-          <a href="<%= family_path(family) %>">
-            <span class="glyphicon glyphicon-info-sign"></span>
-          </a>
-        </td>
-        <td class="hidden-xs text-center list_tool_cell">
-          <a href="<%= family_path(family, :format => :pdf) %>">
-            <span class="glyphicon glyphicon-cloud-download"></span>
-          </a>
-        </td>
-        <td class="hidden-xs text-center list_tool_cell">
-          <a href="<%= edit_family_path(family) %>">
-            <span class="glyphicon glyphicon-wrench"></span>
-          </a>
-        </td>
-      </tr>
+      </tbody>
+    </table>
+
     <% end %>
-  </tbody>
-</table>
 
-<% end %>
-
-<%= link_to 'New Family', new_family_path %>
+  </div>
+</div>

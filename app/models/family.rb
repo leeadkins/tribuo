@@ -14,6 +14,10 @@ class Family < ActiveRecord::Base
     :allow_destroy => true,
     :reject_if     => proc { |attributes| attributes['name'].blank? || attributes['age'].blank? }
 
+  def readable_delivery
+    self.delivery? ? 'Delivery' : 'Pickup'
+  end
+
   def to_pdf(opts={})
     pdf = opts[:pdf].blank? ? FPDF.new('p', 'mm', 'letter') : opts[:pdf]
     half = opts[:half].blank? ? 0  : opts[:half]
@@ -49,7 +53,7 @@ class Family < ActiveRecord::Base
     pdf.TextLeft(30 + modifier, "Name:    " + self.first_name.capitalize + " " + self.last_name.capitalize)
     pdf.TextLeft(40 + modifier, "Address: " + self.address)
     pdf.TextLeft(50 + modifier, "Phone:   " + self.phone)
-    pdf.TextLeft(60 + modifier, (!!self.pickup).to_s)
+    pdf.TextLeft(60 + modifier, self.readable_delivery)
     pdf.SetFont('Arial','BI', 205)
     pdf.TextCenter(120 + modifier,boxString)
     pdf.SetFont('Arial','',30)

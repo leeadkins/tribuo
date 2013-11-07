@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Tribuo::Application.config.secret_key_base = '70b9b465196937d1ee87aeef44f0d2dbfc8b15d7836f5ebe1eee503cbaca5854eeaa56b027fdd050b368b1cae8839cf15a6f4e9a2a1231e61bd42b0ca76ae0c6'
+Tribuo::Application.config.secret_key_base = Figaro.env.session_secret

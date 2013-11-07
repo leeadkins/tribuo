@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131013043344) do
+ActiveRecord::Schema.define(version: 20131105012813) do
 
   create_table "children", force: true do |t|
     t.string   "name"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20131013043344) do
     t.boolean  "food_only"
     t.integer  "box"
     t.integer  "children_count"
-    t.boolean  "pickup"
+    t.boolean  "delivery"
     t.boolean  "flag"
     t.datetime "completed_at"
     t.boolean  "reserve"

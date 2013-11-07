@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Tribuo - Sign In</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <style type="text/css">
+    body {
+      background: #563d7c;
+      color: #fff;
+    }
+    .wrapper {
+      width: 330px;
+      margin: 0 auto;
+    }
+    .form-signin-heading {
+      text-align: center;
+    }
+
+    a {
+      color: #eee;
+    }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="wrapper">
+        <%= yield %>
+      </div>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  </body>
+</html>

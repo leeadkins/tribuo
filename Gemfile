@@ -30,8 +30,13 @@ gem 'faker'
 # Because I don't want to build sorting or searching scopes myself. Duh
 gem 'ransack'
 
+# Because we want to make sure we don't accidentally commit keys and stuff.
+gem 'figaro'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+gem 'json', '~> 1.8.1'
 
 gem 'anjlab-bootstrap-rails', '~> 3.0.0.3', :require => 'bootstrap-rails'
 
