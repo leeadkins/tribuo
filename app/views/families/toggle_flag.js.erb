@@ -1,0 +1,11 @@
+<% if @family.flag %>
+$('#family_row_flag_<%= @family.id %>').removeClass('glyphicon-star-empty gray').addClass('glyphicon-star yellow');
+$('#family_show_flag_<%= @family.id %>').addClass('btn-warning').removeClass('btn-default');
+$('#family_show_flag_<%= @family.id %> .icon').removeClass('glyphicon-star-empty').addClass('glyphicon-star');
+$('#family_show_flag_<%= @family.id %> .text').html('Flagged');
+<% else %>
+$('#family_row_flag_<%= @family.id %>').removeClass('glyphicon-star yellow').addClass('glyphicon-star-empty gray');
+$('#family_show_flag_<%= @family.id %> .icon').removeClass('glyphicon-star').addClass('glyphicon-star-empty');
+$('#family_show_flag_<%= @family.id %> .text').html('Flag');
+$('#family_show_flag_<%= @family.id %>').removeClass('btn-warning').addClass('btn-default');
+<% end %>

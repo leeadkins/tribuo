@@ -1,6 +1,6 @@
 class FamiliesController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_family, only: [:show, :edit, :update, :destroy]
+  before_action :set_family, only: [:show, :edit, :update, :destroy, :toggle_flag]
 
   # GET /families
   # GET /families.json
@@ -25,6 +25,16 @@ class FamiliesController < ApplicationController
   # GET /families/new
   def new
     @family = Family.new
+  end
+
+  def toggle_flag
+
+    @family.flag = !@family.flag
+    @family.save
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /families/1/edit

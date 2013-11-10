@@ -27,7 +27,9 @@
       <thead>
         <tr>
           <th><%= sort_link @search, :box, "#" %></th>
-          <th class="hidden-xs text-center"><%= sort_link @search, :flag, '<span class="glyphicon glyphicon-star"></span>'.html_safe %></th>
+          <th class="hidden-xs text-center">
+            <%= sort_link @search, :flag, '<span class="glyphicon glyphicon-star"></span>'.html_safe %>
+          </th>
           <th><%= sort_link @search, :last_name, "Last Name" %></th>
           <th><%= sort_link @search, :first_name, "First Name" %></th>
           <th class="hidden-xs"><%= sort_link @search, :phone, "Phone" %></th>
@@ -44,11 +46,13 @@
           <tr>
             <td><%= family.box || '-' %></td>
             <td class="hidden-xs text-center">
-            <% if family.flag %>
-              <span class="flag_star glyphicon glyphicon-star yellow"></span>
-            <% else %>
-              <span class="flag_star glyphicon glyphicon-star-empty gray"></span>
-            <% end %>
+              <a data-remote="true" data-method="post" href="<%= toggle_flag_family_path(family) %>">
+              <% if family.flag %>
+                <span id="family_row_flag_<%= family.id %>" class="flag_star glyphicon glyphicon-star yellow"></span>
+              <% else %>
+                <span id="family_row_flag_<%= family.id %>" class="flag_star glyphicon glyphicon-star-empty gray"></span>
+              <% end %>
+              </a>
             </td>
             <td><%= family.last_name %></td>
             <td><%= family.first_name %></td>

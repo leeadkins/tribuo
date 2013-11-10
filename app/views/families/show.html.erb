@@ -44,13 +44,13 @@
     </div>
 
     <% if @family.flag %>
-      <button type="button" class='btn col-md-12 btn-warning'>
-        <span class="glyphicon glyphicon-star"></span> Flagged
-      </button>
+      <a id="family_show_flag_<%= @family.id %>" class='btn col-md-12 btn-warning' data-remote="true" data-method="post" href="<%= toggle_flag_family_path(@family) %>">
+        <span class="icon glyphicon glyphicon-star"></span> <span class="text">Flagged</span>
+      </a>
     <% else %>
-      <button type="button" class='btn col-md-12 btn-default'>
-        <span class="glyphicon glyphicon-star-empty"></span> Flag
-      </button>
+      <a id="family_show_flag_<%= @family.id %>" class='btn col-md-12 btn-default' data-remote="true" data-method="post" href="<%= toggle_flag_family_path(@family) %>">
+        <span class="icon glyphicon glyphicon-star-empty"></span> <span class="text">Flag</span>
+      </a>
     <% end %>
 
     <%= link_to 'Edit', edit_family_path(@family), :class => 'btn btn-primary col-md-12'%>
