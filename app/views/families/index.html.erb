@@ -11,6 +11,16 @@
       <a href="<%= families_path(:q => {:children_size_gt => 0}) %>" class="list-group-item">Children</a>
       <a href="<%= families_path(:q => {:delivery_true => true}) %>" class="list-group-item">Deliveries</a>
     </div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <span class="badge"><%= Family.count %></span>
+        Total Families
+      </li>
+      <li class="list-group-item">
+        <span class="badge"><%= Child.count %></span>
+        Total Children
+      </li>
+    </ul>
   </div>
 
   <div class="col-md-10">
