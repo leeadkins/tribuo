@@ -12,8 +12,6 @@ Tribuo::Application.routes.draw do
     end
   end
 
-  # get 'children(.:format)' => "families#children"
-
   resources :tickets do
     collection do
       post :new_boxes
