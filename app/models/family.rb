@@ -107,12 +107,6 @@ class Family < ActiveRecord::Base
   end
 
   def self.to_pdf(opts={})
-    # to_update = opts[:update] || :new
-
-    # if to_update == :all
-
-    # end
-
     pdf = FPDF.new('p', 'mm', 'letter')
     @families = self.order('box ASC')
     @families.each_with_index do |family, i|
