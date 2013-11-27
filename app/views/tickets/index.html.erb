@@ -1,4 +1,33 @@
-<h1>Food and Toy Tickets</h1>
-<p>
-Coming Soon
-</p>
+<div class="page-header">
+  <h1>Food and Toy Tickets</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h4 style="text-align:center">Ticket Generators</h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4  col-sm-offset-2">
+    <%= link_to 'Generate Food Tickets', families_path(format: :pdf), class: 'btn btn-primary btn-block', target: '_blank' %>
+  </div>
+  <div class="col-sm-4">
+    <button type="button" class="btn btn-primary btn-block btn-dlg">Generate Toy Tickets</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h4 style="text-align:center">Box Number Management</h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4  col-sm-offset-2">
+    <%= link_to 'Generate New Box Numbers', new_boxes_tickets_path, method: :post, confirm: "Are you sure you want to assign box numbers to families?", class: 'btn btn-primary btn-block' %>
+  </div>
+  <div class="col-sm-4">
+    <%= link_to 'Regenerate All Box Numbers', all_boxes_tickets_path, method: :post, confirm: "Are you sure you want to regenerate box numbers? All existing numbers will be reset.", class: 'btn btn-primary btn-block' %>
+  </div>
+</div>

@@ -22,6 +22,12 @@ class Family < ActiveRecord::Base
     self.delivery? ? 'Delivery' : 'Pickup'
   end
 
+  def assign_number!
+    # This isn't perfect. It will will simply find the largest box number and
+    # assign the next number to this object.
+    # Used in a pinch to give your last box a number.
+  end
+
   def to_pdf(opts={})
     pdf = opts[:pdf].blank? ? FPDF.new('p', 'mm', 'letter') : opts[:pdf]
     half = opts[:half].blank? ? 0  : opts[:half]
@@ -71,8 +77,42 @@ class Family < ActiveRecord::Base
 
   end
 
+  def self.assign_all_numbers!
+    to_update = Family.order('family_size DESC, children_size DESC, last_name ASC')
+    current_box = 0
+    to_update.each do |family|
+      current_box = current_box + 1
+      family.box = current_box
+      family.save
+    end
+  end
 
-  def self.to_pdf
+  def self.assign_new_numbers!
+    # First, get the new box number
+    last_family = Family.where('box > 0').order('box DESC').first
+
+    if last_family.nil?
+      current_box = 0
+    else
+      current_box = last_family.box
+    end
+
+    to_update = Family.where(:box => nil).order('family_size DESC, children_size DESC, last_name ASC')
+
+    to_update.each do |family|
+      current_box = current_box + 1
+      family.box = current_box
+      family.save
+    end
+  end
+
+  def self.to_pdf(opts={})
+    # to_update = opts[:update] || :new
+
+    # if to_update == :all
+
+    # end
+
     pdf = FPDF.new('p', 'mm', 'letter')
     @families = self.order('box ASC')
     @families.each_with_index do |family, i|

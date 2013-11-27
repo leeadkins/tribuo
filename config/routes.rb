@@ -11,7 +11,13 @@ Tribuo::Application.routes.draw do
       post :toggle_flag
     end
   end
-  resources :tickets
+
+  resources :tickets do
+    collection do
+      post :new_boxes
+      post :all_boxes
+    end
+  end
   resources :shopping
 
   root 'families#index'
