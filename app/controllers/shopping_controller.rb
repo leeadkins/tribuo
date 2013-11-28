@@ -11,7 +11,7 @@ class ShoppingController < ApplicationController
     @girltotal = 0
     @boytotal = 0
     for child in @children
-      if child.gender == 'Boy'
+      if child.gender.downcase == 'boy'
         if child.age_type == 'year'
           @boyarray[child.age] != nil ?  @boyarray[child.age] += 1 : @boyarray[child.age] = 1
         else
