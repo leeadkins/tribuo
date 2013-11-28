@@ -24,10 +24,26 @@
   </div>
 
   <div class="col-md-10">
+
+    <div class="row">
+      <%= search_form_for(@search, class: 'form') do |f| %>
+        <div class="col-md-10">
+          <%= f.text_field :first_name_or_last_name_cont, class: 'form-control' %>
+        </div>
+        <div class="col-md-2">
+          <%= f.submit 'Search', class: 'btn btn-default form-control' %>
+        </div>
+      <% end %>
+    </div>
+
     <% if @families.empty? %>
 
-    <div class="well well-lg">
-      There are no families in the system yet. <%= link_to 'Create one now.', new_family_path %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="well well-lg">
+          There are no families in the system yet. <%= link_to 'Create one now.', new_family_path %>
+        </div>
+      </div>
     </div>
 
     <% else %>
