@@ -53,7 +53,7 @@ class Child < ActiveRecord::Base
     if counter
       pdf.TextRight(130 + modifier, "Sack #{counter} of #{self.family.children.size.to_s}")
     end
-    # pdf.Image('public/images/tribtick.jpg',5,115 + modifier,60)
+    pdf.Image('public/single-logo.jpg',5,105 + modifier,30)
 
     # We weren't passed a PDF object to build off of, so render ourself
     if opts[:pdf].blank? 
